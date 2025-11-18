@@ -1,0 +1,47 @@
+{
+  "name": "@codavidgarcia/devtoolbox",
+  "version": "1.0.0",
+  "description": "All-in-one developer utility suite - 9 essential CLI tools: kill ports, decode JWTs, generate .gitignore, check connectivity, convert JSON/YAML, generate UUIDs, hash text, encode/decode base64, and work with timestamps",
+  "main": "bin/devkit.js",
+  "bin": {
+    "devtoolbox": "bin/devkit.js"
+  },
+  "scripts": {
+    "test": "node --test tests/*.test.js"
+  },
+  "keywords": [
+    "developer-tools",
+    "cli",
+    "utilities",
+    "kill-port",
+    "jwt",
+    "jwt-decoder",
+    "gitignore",
+    "json",
+    "yaml",
+    "connectivity",
+    "devtools",
+    "uuid",
+    "hash",
+    "base64",
+    "timestamp",
+    "developer-utilities",
+    "productivity"
+  ],
+  "author": "Juan David Garcia",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/juandavidgarcia/devtoolbox.git"
+  },
+  "homepage": "https://github.com/juandavidgarcia/devtoolbox#readme",
+  "dependencies": {
+    "chalk": "^4.1.2",
+    "commander": "^11.1.0",
+    "js-yaml": "^4.1.0",
+    "axios": "^1.6.2"
+  },
+  "engines": {
+    "node": ">=14.0.0"
+  }
+}
