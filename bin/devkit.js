@@ -22,7 +22,7 @@ const program = new Command();
 program
     .name('devtoolbox')
     .description('🛠️  All-in-one developer utility suite')
-    .version('1.1.0', '-v, --version', 'Output the current version');
+    .version('1.1.1', '-v, --version', 'Output the current version');
 
 // Kill port command
 program

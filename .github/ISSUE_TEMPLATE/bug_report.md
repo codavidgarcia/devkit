@@ -1,32 +1,26 @@
 ---
 name: Bug Report
-about: Report a bug to help us improve
-title: '[BUG] '
+about: Report a bug
+title: ''
 labels: bug
 assignees: ''
 ---
 
-## 🐛 Bug Description
-A clear and concise description of what the bug is.
+**Describe the bug**
+What happened?
 
-## 📋 Steps to Reproduce
-1. Run command '...'
-2. With arguments '...'
-3. See error
+**To Reproduce**
+Steps to reproduce:
+1. Run `devtoolbox ...`
+2. See error
 
-## ✅ Expected Behavior
-What you expected to happen.
+**Expected behavior**
+What should have happened?
 
-## ❌ Actual Behavior
-What actually happened.
+**Environment**
+- OS: [e.g. macOS 14.0]
+- Node: [e.g. v20.0.0]
+- DevToolbox: [e.g. 1.1.0]
 
-## 🖥️ Environment
-- OS: [e.g., macOS 14.0, Ubuntu 22.04, Windows 11]
-- Node version: [run `node --version`]
-- DevToolbox version: [run `devtoolbox --version`]
-
-## 📸 Screenshots
-If applicable, add screenshots or terminal output.
-
-## 📝 Additional Context
-Add any other context about the problem here.
+**Additional context**
+Anything else relevant?
