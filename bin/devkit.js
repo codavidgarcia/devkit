@@ -10,6 +10,11 @@ const generateUUID = require('../src/commands/uuid');
 const hash = require('../src/commands/hash');
 const base64Command = require('../src/commands/base64');
 const timestamp = require('../src/commands/timestamp');
+const showIP = require('../src/commands/ip');
+const generateLorem = require('../src/commands/lorem');
+const showColor = require('../src/commands/color');
+const generateQR = require('../src/commands/qr');
+const doctor = require('../src/commands/doctor');
 const chalk = require('chalk');
 
 const program = new Command();
@@ -17,7 +22,7 @@ const program = new Command();
 program
     .name('devtoolbox')
     .description('🛠️  All-in-one developer utility suite')
-    .version('1.0.0', '-v, --version', 'Output the current version');
+    .version('1.1.0', '-v, --version', 'Output the current version');
 
 // Kill port command
 program
@@ -101,6 +106,46 @@ program
     .description('Get current timestamp or convert Unix timestamp to readable format')
     .action((value) => {
         timestamp(value);
+    });
+
+// IP address command
+program
+    .command('ip')
+    .description('Show local and public IP addresses')
+    .action(() => {
+        showIP();
+    });
+
+// Lorem ipsum generator
+program
+    .command('lorem [words]')
+    .description('Generate lorem ipsum placeholder text')
+    .action((words) => {
+        generateLorem(parseInt(words) || 50);
+    });
+
+// Color preview command
+program
+    .command('color <hex>')
+    .description('Preview a hex color in the terminal')
+    .action((hex) => {
+        showColor(hex);
+    });
+
+// QR code generator
+program
+    .command('qr <text>')
+    .description('Generate a QR code in the terminal')
+    .action((text) => {
+        generateQR(text);
+    });
+
+// Doctor command
+program
+    .command('doctor')
+    .description('Check development environment health')
+    .action(() => {
+        doctor();
     });
 
 // Show help if no command provided
