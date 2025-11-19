@@ -1,6 +1,6 @@
 {
   "name": "@codavidgarcia/devtoolbox",
-  "version": "2.0.0",
+  "version": "2.1.0",
   "description": "Local development toolkit - cohesive CLI tools for developers: kill ports, check environment, decode JWTs, manage network, and more",
   "main": "bin/devkit.js",
   "bin": {

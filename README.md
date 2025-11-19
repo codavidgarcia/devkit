@@ -18,6 +18,9 @@ npm install -g @codavidgarcia/devtoolbox
 
 ## Commands
 
+### Project Setup
+- `init` - Auto-setup project (detects type, generates .gitignore, checks env, frees ports)
+
 ### Environment & Ports
 - `doctor` - Check your dev environment and detect blocked ports
 - `ports` - List all active ports (tracks frequently used ones)
@@ -59,6 +62,12 @@ Active Ports:
 ```
 
 ## Examples
+
+Setup a new project:
+```bash
+devtoolbox init
+# Detects project type, generates .gitignore, checks env, frees ports
+```
 
 Check your environment:
 ```bash

@@ -10,6 +10,7 @@ const hash = require('../src/commands/hash');
 const base64Command = require('../src/commands/base64');
 const showIP = require('../src/commands/ip');
 const doctor = require('../src/commands/doctor');
+const init = require('../src/commands/init');
 const chalk = require('chalk');
 
 const program = new Command();
@@ -17,7 +18,18 @@ const program = new Command();
 program
     .name('devtoolbox')
     .description('Local development toolkit')
-    .version('2.0.0', '-v, --version', 'Output the current version');
+    .version('2.1.0', '-v, --version', 'Output the current version')
+    .option('--json', 'Output in JSON format')
+    .option('--quiet', 'Suppress output (exit codes only)')
+    .option('--verbose', 'Show detailed output');
+
+// Init command (NEW)
+program
+    .command('init')
+    .description('Setup project (gitignore, check env, free ports)')
+    .action(() => {
+        init();
+    });
 
 // Kill port command
 program
@@ -28,7 +40,7 @@ program
         killPort(port);
     });
 
-// List ports command (NEW)
+// List ports command
 program
     .command('ports')
     .description('List all active ports')

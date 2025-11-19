@@ -1,5 +1,21 @@
 # Changelog
 
+## [2.1.0] - 2025-11-18
+
+### Added
+- `init` command for automated project setup
+  - Auto-detects project type (Node.js, Python, Ruby, Go, Rust, Java)
+  - Generates appropriate .gitignore
+  - Checks environment health
+  - Frees commonly blocked ports
+- Global flags for all commands:
+  - `--json` for JSON output (scriptable)
+  - `--quiet` for silent mode (exit codes only)
+  - `--verbose` for detailed output
+
+### Changed
+- Improved command consistency across toolkit
+
 ## [2.0.0] - 2025-11-18
 
 ### Breaking Changes
