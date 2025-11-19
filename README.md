@@ -1,14 +1,10 @@
 # DevToolbox
 
-Local development toolkit with cohesive CLI tools that work together.
+Local development toolkit - 11 CLI tools you actually need, working together.
 
 [![npm version](https://img.shields.io/npm/v/@codavidgarcia/devtoolbox.svg)](https://www.npmjs.com/package/@codavidgarcia/devtoolbox)
 [![npm downloads](https://img.shields.io/npm/dm/@codavidgarcia/devtoolbox.svg)](https://www.npmjs.com/package/@codavidgarcia/devtoolbox)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-
-## What makes this different?
-
-The commands talk to each other. When `doctor` finds a blocked port, it suggests `kill-port`. When you kill a port frequently, it tracks it and shows suggestions. This isn't just a collection of tools - it's an integrated system.
 
 ## Installation
 
@@ -16,29 +12,31 @@ The commands talk to each other. When `doctor` finds a blocked port, it suggests
 npm install -g @codavidgarcia/devtoolbox
 ```
 
-## Commands
+## What's included
 
-### Project Setup
-- `init` - Auto-setup project (detects type, generates .gitignore, checks env, frees ports)
+**Project Setup**
+- `init` - Auto-setup projects (detects type, generates .gitignore, checks env, frees ports)
 
-### Environment & Ports
-- `doctor` - Check your dev environment and detect blocked ports
-- `ports` - List all active ports (tracks frequently used ones)
-- `kill-port <port>` - Kill process on port (learns from usage)
+**Environment & Ports**
+- `doctor` - Check Node, npm, Git, internet, and detect blocked ports
+- `ports` - List all active ports
+- `kill-port <port>` - Kill process on any port
 
-### Network
-- `online` - Check internet connectivity  
-- `ip` - Show local and public IP
+**Network**
+- `online` - Check internet connectivity (gateway, DNS, HTTP)
+- `ip` - Show local and public IP addresses
 
-### Security & Encoding
-- `jwt <token>` - Decode JWT tokens (offline)
-- `hash <text>` - Generate hashes
+**Security & Encoding**
+- `jwt <token>` - Decode JWT tokens (works offline)
+- `hash <text>` - Generate hashes (md5, sha1, sha256, sha512)
 - `encode/decode <text>` - Base64 encoding
 
-### Project Setup
-- `gitignore <templates>` - Generate .gitignore files
+**Project Files**
+- `gitignore <templates>` - Generate .gitignore from templates
 
-## How they work together
+## What makes this different
+
+The commands talk to each other and learn from your usage:
 
 ```bash
 # doctor detects issues and suggests fixes
@@ -60,6 +58,8 @@ Active Ports:
 
 [COMMON] = Frequently used in your projects
 ```
+
+They share context (~/.devtoolbox/context.json) to remember patterns and suggest next steps.
 
 ## Examples
 
