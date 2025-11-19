@@ -2,18 +2,13 @@
 
 const { Command } = require('commander');
 const killPort = require('../src/commands/kill-port');
+const listPorts = require('../src/commands/ports');
 const decodeJWT = require('../src/commands/jwt');
 const generateGitignore = require('../src/commands/gitignore');
 const checkConnectivity = require('../src/commands/online');
-const convert = require('../src/commands/convert');
-const generateUUID = require('../src/commands/uuid');
 const hash = require('../src/commands/hash');
 const base64Command = require('../src/commands/base64');
-const timestamp = require('../src/commands/timestamp');
 const showIP = require('../src/commands/ip');
-const generateLorem = require('../src/commands/lorem');
-const showColor = require('../src/commands/color');
-const generateQR = require('../src/commands/qr');
 const doctor = require('../src/commands/doctor');
 const chalk = require('chalk');
 
@@ -21,8 +16,8 @@ const program = new Command();
 
 program
     .name('devtoolbox')
-    .description('🛠️  All-in-one developer utility suite')
-    .version('1.1.1', '-v, --version', 'Output the current version');
+    .description('Local development toolkit')
+    .version('2.0.0', '-v, --version', 'Output the current version');
 
 // Kill port command
 program
@@ -33,10 +28,27 @@ program
         killPort(port);
     });
 
+// List ports command (NEW)
+program
+    .command('ports')
+    .description('List all active ports')
+    .option('--common', 'Show only common development ports')
+    .action((options) => {
+        listPorts(options);
+    });
+
+// Doctor command
+program
+    .command('doctor')
+    .description('Check development environment health')
+    .action(() => {
+        doctor();
+    });
+
 // JWT decoder command
 program
     .command('jwt <token>')
-    .description('Decode a JWT token (100% offline)')
+    .description('Decode a JWT token (works offline)')
     .action((token) => {
         decodeJWT(token);
     });
@@ -45,7 +57,7 @@ program
 program
     .command('gitignore <templates...>')
     .alias('gi')
-    .description('Generate .gitignore file from templates (e.g., node, python, macos)')
+    .description('Generate .gitignore file from templates')
     .option('-s, --stdout', 'Output to stdout instead of file')
     .action((templates, options) => {
         generateGitignore(templates, options);
@@ -54,25 +66,17 @@ program
 // Connectivity check command
 program
     .command('online')
-    .description('Check internet connectivity (gateway, DNS, HTTP)')
+    .description('Check internet connectivity')
     .action(() => {
         checkConnectivity();
     });
 
-// JSON/YAML converter command
+// IP address command
 program
-    .command('convert [file]')
-    .description('Convert between JSON and YAML (auto-detects format)')
-    .action((file) => {
-        convert(file);
-    });
-
-// UUID generator command
-program
-    .command('uuid')
-    .description('Generate a random UUID v4')
+    .command('ip')
+    .description('Show local and public IP addresses')
     .action(() => {
-        generateUUID();
+        showIP();
     });
 
 // Hash generator command
@@ -99,58 +103,9 @@ program
         base64Command(text, 'decode');
     });
 
-// Timestamp command
-program
-    .command('timestamp [value]')
-    .alias('ts')
-    .description('Get current timestamp or convert Unix timestamp to readable format')
-    .action((value) => {
-        timestamp(value);
-    });
-
-// IP address command
-program
-    .command('ip')
-    .description('Show local and public IP addresses')
-    .action(() => {
-        showIP();
-    });
-
-// Lorem ipsum generator
-program
-    .command('lorem [words]')
-    .description('Generate lorem ipsum placeholder text')
-    .action((words) => {
-        generateLorem(parseInt(words) || 50);
-    });
-
-// Color preview command
-program
-    .command('color <hex>')
-    .description('Preview a hex color in the terminal')
-    .action((hex) => {
-        showColor(hex);
-    });
-
-// QR code generator
-program
-    .command('qr <text>')
-    .description('Generate a QR code in the terminal')
-    .action((text) => {
-        generateQR(text);
-    });
-
-// Doctor command
-program
-    .command('doctor')
-    .description('Check development environment health')
-    .action(() => {
-        doctor();
-    });
-
 // Show help if no command provided
 if (!process.argv.slice(2).length) {
-    console.log(chalk.bold.cyan('\n🛠️  DevToolbox - All-in-One Developer Utility Suite\n'));
+    console.log(chalk.bold.cyan('\n🛠️  DevToolbox - Local Development Toolkit\n'));
     program.outputHelp();
 }
 

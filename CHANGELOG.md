@@ -1,26 +1,35 @@
 # Changelog
 
+## [2.0.0] - 2025-11-18
+
+### Breaking Changes
+- Removed 6 commands: `uuid`, `lorem`, `color`, `qr`, `timestamp`, `convert`
+- Focus shifted to cohesive local development tools
+
+### Added
+- `ports` command to list all active ports
+- Context system (~/.devtoolbox/context.json) for shared state
+- Cross-command integration:
+  - `doctor` now detects blocked ports and suggests fixes
+  - `kill-port` tracks frequently blocked ports
+  - `ports` shows which ports you use often
+
+### Changed
+- `doctor` now checks common dev ports (3000, 8080, 5432)
+- `kill-port` shows process names and gives suggestions
+- All commands now share context and learn from usage
+
+## [1.1.1] - 2025-11-18
+
+### Changed
+- Humanized all documentation
+- Removed AI-generated language patterns
+
 ## [1.1.0] - 2025-11-18
 
 ### Added
-- `ip` command to show local and public IP addresses
-- `lorem` command to generate placeholder text
-- `color` command to preview hex colors
-- `qr` command to generate QR codes in terminal
-- `doctor` command to check development environment
-
-### Changed
-- Updated README
+- `ip`, `lorem`, `color`, `qr`, `doctor` commands
 
 ## [1.0.0] - 2025-11-18
 
-Initial release with 9 commands:
-- `kill-port` - Kill process on port
-- `jwt` - Decode JWT tokens
-- `gitignore` - Generate .gitignore files
-- `online` - Check connectivity
-- `convert` - Convert JSON/YAML
-- `uuid` - Generate UUIDs
-- `hash` - Generate hashes
-- `encode/decode` - Base64 encoding
-- `timestamp` - Unix timestamp tools
+Initial release with 9 commands.

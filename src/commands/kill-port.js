@@ -1,6 +1,8 @@
 const { exec } = require('child_process');
 const { promisify } = require('util');
 const logger = require('../utils/logger');
+const chalk = require('chalk');
+const { trackPortKill, addToHistory } = require('../utils/context');
 
 const execAsync = promisify(exec);
 
@@ -32,6 +34,8 @@ async function killPort(port) {
         }
 
         let pid;
+        let processName = 'unknown';
+
         if (platform === 'win32') {
             // Extract PID from Windows netstat output
             const lines = stdout.trim().split('\n');
@@ -40,6 +44,14 @@ async function killPort(port) {
         } else {
             // Unix-like systems return PID directly
             pid = stdout.trim().split('\n')[0];
+
+            // Try to get process name
+            try {
+                const { stdout: psOut } = await execAsync(`ps -p ${pid} -o comm=`);
+                processName = psOut.trim();
+            } catch (e) {
+                // Ignore if we can't get process name
+            }
         }
 
         // Kill the process
@@ -48,7 +60,18 @@ async function killPort(port) {
             : `kill -9 ${pid}`;
 
         await execAsync(killCommand);
-        logger.success(`Killed process ${pid} on port ${port}`);
+        logger.success(`Killed ${processName} (PID ${pid}) on port ${port}`);
+
+        // Track in context
+        await addToHistory(`kill-port ${port}`);
+        const isNowCommon = await trackPortKill(portNum);
+
+        // Show suggestions
+        if (isNowCommon) {
+            console.log(chalk.yellow(`\nTip: Port ${port} is frequently blocked.`));
+            console.log(chalk.dim(`  → Consider running 'devtoolbox ports' to see all active ports`));
+        }
+
     } catch (error) {
         if (error.code === 1 || error.stdout === '') {
             logger.warning(`No process found running on port ${port}`);

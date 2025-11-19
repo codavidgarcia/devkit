@@ -1,114 +1,104 @@
 # DevToolbox
 
-A collection of 14 command-line utilities for developers. One install, multiple tools.
+Local development toolkit with cohesive CLI tools that work together.
 
 [![npm version](https://img.shields.io/npm/v/@codavidgarcia/devtoolbox.svg)](https://www.npmjs.com/package/@codavidgarcia/devtoolbox)
 [![npm downloads](https://img.shields.io/npm/dm/@codavidgarcia/devtoolbox.svg)](https://www.npmjs.com/package/@codavidgarcia/devtoolbox)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
+## What makes this different?
+
+The commands talk to each other. When `doctor` finds a blocked port, it suggests `kill-port`. When you kill a port frequently, it tracks it and shows suggestions. This isn't just a collection of tools - it's an integrated system.
+
 ## Installation
 
 ```bash
 npm install -g @codavidgarcia/devtoolbox
-
-# or use with npx
-npx @codavidgarcia/devtoolbox <command>
 ```
 
 ## Commands
 
-### Process Management
-- `kill-port <port>` - Kill process running on a port
-- `doctor` - Check your development environment
-
-### Security & Encoding  
-- `jwt <token>` - Decode JWT tokens (works offline)
-- `hash <text>` - Generate hashes (md5, sha1, sha256, sha512)
-- `encode <text>` / `decode <text>` - Base64 encoding
+### Environment & Ports
+- `doctor` - Check your dev environment and detect blocked ports
+- `ports` - List all active ports (tracks frequently used ones)
+- `kill-port <port>` - Kill process on port (learns from usage)
 
 ### Network
-- `online` - Check internet connectivity
-- `ip` - Show your local and public IP
+- `online` - Check internet connectivity  
+- `ip` - Show local and public IP
 
-### File & Data
-- `gitignore <templates...>` - Generate .gitignore files
-- `convert [file]` - Convert between JSON and YAML
+### Security & Encoding
+- `jwt <token>` - Decode JWT tokens (offline)
+- `hash <text>` - Generate hashes
+- `encode/decode <text>` - Base64 encoding
 
-### Generators
-- `uuid` - Generate a UUID
-- `lorem [words]` - Generate lorem ipsum text
-- `qr <text>` - Generate QR codes in your terminal
-- `color <hex>` - Preview hex colors
+### Project Setup
+- `gitignore <templates>` - Generate .gitignore files
 
-### Time
-- `timestamp [value]` - Work with Unix timestamps
+## How they work together
+
+```bash
+# doctor detects issues and suggests fixes
+$ devtoolbox doctor
+✗ Port 3000 in use (node)
+→ Run 'devtoolbox kill-port 3000' to fix
+
+# kill-port learns from frequent usage
+$ devtoolbox kill-port 3000
+✓ Killed node (PID 1234) on port 3000
+Tip: Port 3000 is frequently blocked
+  → Run 'devtoolbox ports' to see all active ports
+
+# ports shows which ones you use often
+$ devtoolbox ports
+Active Ports:
+  3000  node     PID 1234  [COMMON]
+  8080  nginx    PID 5678
+
+[COMMON] = Frequently used in your projects
+```
 
 ## Examples
-
-Kill a process on port 3000:
-```bash
-devtoolbox kill-port 3000
-```
-
-Decode a JWT (completely offline):
-```bash
-devtoolbox jwt eyJhbGc...
-```
-
-Generate a .gitignore for Node and macOS:
-```bash
-devtoolbox gitignore node macos
-```
-
-Check if you're online:
-```bash
-devtoolbox online
-```
-
-Convert JSON to YAML:
-```bash
-devtoolbox convert config.json
-```
-
-Generate a UUID:
-```bash
-devtoolbox uuid
-```
-
-Hash a string:
-```bash
-devtoolbox hash "my-password" -a sha256
-```
-
-Preview a color:
-```bash
-devtoolbox color ff5733
-```
-
-Generate a QR code:
-```bash
-devtoolbox qr "https://example.com"
-```
 
 Check your environment:
 ```bash
 devtoolbox doctor
 ```
 
+See all active ports:
+```bash
+devtoolbox ports
+devtoolbox ports --common  # only common dev ports
+```
+
+Kill a process:
+```bash
+devtoolbox kill-port 3000
+```
+
+Decode a JWT:
+```bash
+devtoolbox jwt eyJhbGc...
+```
+
+Generate .gitignore:
+```bash
+devtoolbox gitignore node macos
+```
+
+Check connectivity:
+```bash
+devtoolbox online
+```
+
 ## Why?
 
-I got tired of installing separate tools for common tasks. This bundles the ones I use most into a single package.
-
-Some commands (like the JWT decoder) work completely offline, which is nice for privacy. The whole thing is about 14kB.
+I kept installing separate tools for these tasks. This bundles them and makes them work together through shared context (~/.devtoolbox/context.json).
 
 ## Contributing
 
-Pull requests welcome. If you want to add a command, check out the [contributing guide](CONTRIBUTING.md).
+Pull requests welcome. See [CONTRIBUTING.md](CONTRIBUTING.md).
 
 ## License
 
 MIT
-
----
-
-Made by [@codavidgarcia](https://twitter.com/codavidgarcia)

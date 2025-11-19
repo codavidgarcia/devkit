@@ -1,7 +1,7 @@
 {
   "name": "@codavidgarcia/devtoolbox",
-  "version": "1.1.1",
-  "description": "All-in-one developer utility suite - 14 essential CLI tools: kill ports, decode JWTs, generate .gitignore, check connectivity, convert JSON/YAML, generate UUIDs, hash text, encode/decode base64, work with timestamps, show IPs, generate lorem ipsum, preview colors, create QR codes, and check environment health",
+  "version": "2.0.0",
+  "description": "Local development toolkit - cohesive CLI tools for developers: kill ports, check environment, decode JWTs, manage network, and more",
   "main": "bin/devkit.js",
   "bin": {
     "devtoolbox": "./bin/devkit.js"
@@ -12,26 +12,17 @@
   "keywords": [
     "developer-tools",
     "cli",
-    "utilities",
+    "local-development",
     "kill-port",
     "jwt",
-    "jwt-decoder",
+    "environment-check",
     "gitignore",
-    "json",
-    "yaml",
-    "connectivity",
+    "network-tools",
     "devtools",
-    "uuid",
     "hash",
     "base64",
-    "timestamp",
-    "developer-utilities",
-    "productivity",
-    "qr-code",
-    "lorem-ipsum",
-    "color-preview",
     "ip-address",
-    "environment-check"
+    "productivity"
   ],
   "author": "Juan David Garcia",
   "license": "MIT",
@@ -44,8 +35,7 @@
     "chalk": "^4.1.2",
     "commander": "^11.1.0",
     "js-yaml": "^4.1.0",
-    "axios": "^1.6.2",
-    "qrcode-terminal": "^0.12.0"
+    "axios": "^1.6.2"
   },
   "engines": {
     "node": ">=14.0.0"
